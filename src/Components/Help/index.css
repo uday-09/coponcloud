@@ -1,0 +1,14 @@
+.videoplayer-main-conainer {
+  display: flex;
+  justify-content: center;
+  font-family: "Roboto";
+}
+
+.video-container {
+  text-align: center;
+}
+
+.responsive-container {
+  margin: 20px;
+  border-radius: 20px;
+}

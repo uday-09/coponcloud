@@ -1,0 +1,19 @@
+.About-descritpion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 80%;
+
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.06);
+  padding: 40px;
+}
+
+.about-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}

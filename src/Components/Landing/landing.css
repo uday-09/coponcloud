@@ -1,0 +1,51 @@
+.landing-container {
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.75)),
+    url("https://thefintechtimes.com/wp-content/uploads/2020/09/iStock-1165048144.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.buttons-container {
+  display: flex;
+}
+
+.description2 {
+  text-align: center;
+}
+
+.landing-content {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.75));
+  color: white;
+  width: 50%;
+  height: 50%;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "roboto";
+}
+
+.button3 {
+  color: white;
+}
+
+.logo-landing {
+  height: 200px;
+  width: 200px;
+}

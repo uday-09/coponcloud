@@ -1,0 +1,137 @@
+.post_link_container {
+  text-decoration: none;
+}
+
+.Liked {
+  color: red;
+}
+
+.project-item-container2 {
+  width: 450px;
+  background: #ffffff;
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.09);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  text-align: left;
+}
+
+.project-item-image {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  max-height: 300px;
+  height: 300px;
+}
+
+.project-item-details-container {
+  padding: 32px 24px 32px 24px;
+}
+
+.project-item-title {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  color: #183b56;
+  margin: 0;
+}
+
+.project-item-description {
+  font-family: "Roboto";
+  font-size: 18px;
+  line-height: 32px;
+  margin-top: 12px;
+  margin-bottom: 0;
+  color: #7b8794;
+  text-decoration: none;
+}
+.moreContent {
+  font-size: 12px;
+  color: blue;
+}
+.user-card-container {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  padding: 10px 10px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+}
+
+.user-details-container {
+  margin-left: 12px;
+  text-align: left !important;
+}
+
+.user-name {
+  font-size: 18px;
+  color: black;
+  font-family: "Roboto";
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+
+.user-designation {
+  font-family: "Roboto";
+  font-size: 14px;
+  color: #594d6d;
+  margin: 0px;
+}
+
+.icon:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.icon {
+  color: black;
+}
+
+.likes-comments-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.like-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 192, 30, 0.1);
+  border-radius: 20px;
+  width: 165px;
+  color: rgb(255, 184, 5);
+  height: 35px;
+}
+
+.like-wrapper:hover {
+  cursor: pointer;
+}
+
+.comments {
+  background-color: rgba(11, 105, 255, 0.1);
+}
+
+.btn-none {
+  padding: 0;
+  border-width: 0;
+  margin: 0;
+  border-radius: 20px;
+}
+
+.liked-post {
+  background-color: rgba(255, 55, 87, 0.1);
+  color: rgba(255, 55, 87, 1);
+  border-color: rgba(255, 55, 87, 1);
+  border-width: 1px;
+}

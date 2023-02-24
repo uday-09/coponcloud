@@ -1,0 +1,59 @@
+.login-button {
+  cursor: pointer;
+}
+
+/* .signupForm {
+  text-align: center;
+}
+
+.login_fields_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.login_signup_input_box {
+  width: 450px;
+  height: 40px;
+  border-radius: 5px;
+
+  border: 1px solid #7d8c94;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.login_title_heading {
+  text-align: center;
+}
+
+.show_password_and_signup_container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.show_password_and_signup_container
+  .sub_showpassword_container
+  .checkbox_input_field {
+  margin-right: 10px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sub_showpassword_container {
+  display: flex;
+}
+
+.button {
+  padding-left: 10px 30px;
+}
+
+.button:hover {
+  background-color: rgba(3, 7, 238, 1);
+  color: white;
+}
+ */
