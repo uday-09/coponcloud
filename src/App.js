@@ -16,6 +16,7 @@ import Protected from "./Components/Protected";
 import Landing from "./Components/Landing";
 import User from "./Components/User";
 import About from "./Components/About";
+import Comments from "./Components/Comments";
 
 const App = () => (
   <BrowserRouter>
@@ -33,6 +34,8 @@ const App = () => (
       <Protected exact path="/editbio" component={EditBio} />
       <Protected exact path="/edit/:id" component={EditPost} />
       <Protected exact path="/view/:id" component={MypostFullView} />
+      <Protected exact path="/Comments/:id" component={Comments} />
+
       <Protected component={Notfound} />
     </Switch>
   </BrowserRouter>

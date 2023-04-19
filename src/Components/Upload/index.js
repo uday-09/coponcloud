@@ -138,17 +138,7 @@ class Login extends Component {
       });
     } catch (err) {
       // this.setState({ isLoading: false });
-      console.log(err);
-      console.log(err.repsonse.data);
-      if (err?.response?.data) {
-        return this.setState({
-          ...this.state,
-          isLoading: false,
-          error: err?.response?.data.message,
-        });
-      }
       this.setState({
-        ...this.state,
         isLoading: false,
         error: "Something went wrong try again.",
         success: "",
@@ -156,7 +146,10 @@ class Login extends Component {
     }
   };
 
+
+
   render() {
+    console.log(this.state)
     return (
       <div className="login-form-container">
         <img

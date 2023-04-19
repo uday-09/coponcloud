@@ -49,6 +49,7 @@ class Feed extends Component {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("result---->",result)
       var user = await axios.get("http://localhost:3500/user/me", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -156,7 +157,7 @@ class Feed extends Component {
 
   render() {
     const { display, res, userInfo } = this.state;
-    console.log(this.props.user);
+    console.log(this.state);
 
     if (this.state.error) {
       return (
@@ -166,6 +167,14 @@ class Feed extends Component {
         </div>
       );
     }
+    if (res.length===0){
+      return (
+        <div>
+          <Header></Header>
+          <ErrorPage message={"Currently we have No feed posts to show!"}></ErrorPage>
+        </div>
+      );
+      }
 
     if (res.length !== 0) {
       return (

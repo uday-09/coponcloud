@@ -1,6 +1,7 @@
 import "./index.css";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import Cookies from "js-cookie";
+import { APP_IMAGE } from "../../Utils/constants";
 
 const Header = (props) => {
   const { history } = props;
@@ -22,7 +23,7 @@ const Header = (props) => {
     <nav className="nav-header">
       <div className="nav-content">
         <Link to="/feed">
-          <img src="assets/logo.png" className="logo" alt="logo" />
+          <img src={APP_IMAGE} className="logo" alt="logo" />
         </Link>
         <ul className="nav-menu">
           <li>

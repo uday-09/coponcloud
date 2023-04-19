@@ -123,21 +123,25 @@ const PostItem = (props) => {
                 {checkIfLiked() ? "Made trend" : "Trend this"}
               </p>
             </div>
-            <button
-              className="btn-none"
-              onClick={() => console.log(projectDetails, userId)}
-            >
-              <div className="like-wrapper comments">
-                <BiCommentDetail
-                  color="rgba(11, 105, 255, 1)"
-                  size={24}
-                  style={{ marginRight: 10, marginLeft: 10 }}
-                ></BiCommentDetail>
-                <p style={{ marginRight: 10, color: "rgba(11, 105, 255, 1)" }}>
-                  Comments
-                </p>
-              </div>
-            </button>
+            <Link to={`/Comments/${_id}`}>
+              <button
+                className="btn-none"
+                onClick={() => console.log(projectDetails, userId)}
+              >
+                <div className="like-wrapper comments">
+                  <BiCommentDetail
+                    color="rgba(11, 105, 255, 1)"
+                    size={24}
+                    style={{ marginRight: 10, marginLeft: 10 }}
+                  ></BiCommentDetail>
+                  <p
+                    style={{ marginRight: 10, color: "rgba(11, 105, 255, 1)" }}
+                  >
+                    Comments
+                  </p>
+                </div>
+              </button>
+            </Link>
           </div>
         </div>
 
