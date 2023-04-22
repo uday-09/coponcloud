@@ -63,6 +63,7 @@ const PostItem = (props) => {
     return likes.includes(userId);
   };
 
+  console.log(profilePic);
   return (
     <li className="project-item-container2">
       <div className="user-card-container">
@@ -123,7 +124,12 @@ const PostItem = (props) => {
                 {checkIfLiked() ? "Made trend" : "Trend this"}
               </p>
             </div>
-            <Link to={`/Comments/${_id}`}>
+            <Link
+              to={{
+                pathname: `/Comments/${_id}`,
+                state: [{ ...projectDetails, from: "Comments" }],
+              }}
+            >
               <button
                 className="btn-none"
                 onClick={() => console.log(projectDetails, userId)}
@@ -146,7 +152,10 @@ const PostItem = (props) => {
         </div>
 
         <Link
-          to={{ pathname: `/posts/${_id}`, state: [projectDetails] }}
+          to={{
+            pathname: `/Comments/${_id}`,
+            state: [{ ...projectDetails, from: "View" }],
+          }}
           className="post_link_container"
         >
           <h1 className="project-item-title">{title.slice(0, 50)}...</h1>

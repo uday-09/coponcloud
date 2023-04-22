@@ -19,6 +19,8 @@ class EachPostItem extends Component {
       date,
     } = postDetails;
 
+    console.log(this.props.location.state[0]);
+
     return (
       <div className="blog-info">
         <div className="author-details">

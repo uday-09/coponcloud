@@ -15,6 +15,10 @@ function Comments(props) {
   const [postedUserInfo, setPostedUserInfo] = useState(null);
   const [err, setErr] = useState("");
   const { id } = useParams();
+
+  const { from, postedBy } = props?.location?.state[0];
+  console.log("Props--->", from, from === "View", postedBy);
+
   const getPostInfo = () => {
     if (!id) {
       return setErr("Something went wrong!");
@@ -30,10 +34,10 @@ function Comments(props) {
             setPostedUserInfo(res.data?.user);
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
           })
           .finally(() => {
-            console.log("Done");
+            // console.log("Done");
           });
       })
       .catch((err) => {
@@ -52,13 +56,13 @@ function Comments(props) {
     getPostInfo();
   }, [id]);
 
-  console.log("Post ==>", post);
+  // console.log("Post ==>", post);
 
   return (
     <>
       <Header></Header>
       <CommentsModal
-        open={true}
+        open={from === "View" ? false : true}
         modalData={{ post, postedUserInfo }}
       ></CommentsModal>
       <div className="centered-view">
@@ -70,6 +74,7 @@ function Comments(props) {
           }}
           cover={
             <>
+              {/* <Link to={{ pathname: `/user/${postedBy}`, state: [postedBy] }}> */}
               {post?.imageUri.endsWith("mp4") ||
               post?.imageUri.endsWith("mkv") ? (
                 <video controls style={{ width: "100%", height: 300 }}>
@@ -82,34 +87,35 @@ function Comments(props) {
                   style={{ width: "100%", height: 300 }}
                 />
               )}
+              {/* </Link> */}
             </>
           }
-          actions={[
-            <Link to={`/view/post/${post?._id}`}>
-              {
-                <Button type="primary">
-                  {post?.postStatus === "accepted" ? "Reject" : "Accept"}
-                </Button>
-              }
-            </Link>,
-            <Link to={`/view/post/${post?._id}`}>
-              <Button>View More</Button>
-            </Link>,
-            <Link to={`/view/post/${post?._id}`}>
-              <Button
-                style={{
-                  backgroundColor:
-                    post?.postStatus === "accepted"
-                      ? "rgba(0,225,0, 0.5)"
-                      : post?.postStatus === "rejected"
-                      ? "rgba(225,0,0,0.5)"
-                      : "orange",
-                }}
-              >
-                {post?.postStatus}
-              </Button>
-            </Link>,
-          ]}
+          // // actions={[
+          // //   <Link to={`/view/post/${post?._id}`}>
+          // //     {
+          // //       <Button type="primary">
+          // //         {post?.postStatus === "accepted" ? "Reject" : "Accept"}
+          // //       </Button>
+          // //     }
+          // //   </Link>,
+          // //   <Link to={`/view/post/${post?._id}`}>
+          // //     <Button>View More</Button>
+          // //   </Link>,
+          // //   <Link to={`/view/post/${post?._id}`}>
+          // //     <Button
+          // //       style={{
+          // //         backgroundColor:
+          // //           post?.postStatus === "accepted"
+          // //             ? "rgba(0,225,0, 0.5)"
+          // //             : post?.postStatus === "rejected"
+          // //             ? "rgba(225,0,0,0.5)"
+          // //             : "orange",
+          // //       }}
+          // //     >
+          // //       {post?.postStatus}
+          // //     </Button>
+          // //   </Link>,
+          // ]}
         >
           <Card.Meta
             avatar={
