@@ -1,16 +1,14 @@
 import "./index.css";
 import { Link } from "react-router-dom";
-import { SlLike, SlDislike } from "react-icons/sl";
-import { TfiComments } from "react-icons/tfi";
-import { CiSaveDown2 } from "react-icons/ci";
+import { Card, Avatar, Button } from "antd";
 
 const OthersPosts = (props) => {
   const { projectDetails } = props;
-  const { imageUri, title, description, _id } = projectDetails;
+  const { imageUri, title, description, _id, profilePic } = projectDetails;
 
   return (
     <>
-      <li className="project-item-container">
+      {/* <li className="project-item-container">
         <img className="project-item-image" src={imageUri} alt={`${_id}`} />
 
         <div className="project-item-details-container">
@@ -33,7 +31,81 @@ const OthersPosts = (props) => {
             </p>
           </Link>
         </div>
-      </li>
+      </li> */}
+      <Card
+        hoverable={true}
+        style={{
+          width: 350,
+          marginLeft: 15,
+          marginBottom: 15,
+          // zIndex: 1,
+          // position: "relative",
+        }}
+        cover={
+          <>
+            {imageUri.endsWith("mp4") || imageUri.endsWith("mkv") ? (
+              <video controls style={{ width: 350, height: 200 }}>
+                <source src={imageUri} type="video/mp4" />
+              </video>
+            ) : (
+              <img
+                alt="Post-item"
+                src={imageUri}
+                style={{ width: 350, height: 200 }}
+              />
+            )}
+          </>
+        }
+        actions={[
+          // <Link to={{ pathname: `/edit/${_id}`, state: [projectDetails] }}>
+          //   <Button type="primary">Edit Post</Button>
+          // </Link>,
+          // <Button type="ghost" onClick={removeClicked}>
+          //   Remove
+          // </Button>,
+          <Link
+            to={{
+              pathname: `/Comments/${_id}`,
+              state: [{ ...projectDetails, from: "View" }],
+            }}
+          >
+            <Button type="dashed">View More</Button>{" "}
+          </Link>,
+
+          // <Link to={`/view/post/${_id}`}>
+          //   {
+          //     <Button type="primary">
+          //       {postStatus === "accepted" ? "Reject" : "Accept"}
+          //     </Button>
+          //   }
+          // </Link>,
+          // <Link to={`/view/post/${_id}`}>
+          //   <Button>View More</Button>
+          // </Link>,
+          // <Link to={`/view/post/${_id}`}>
+          //   <Button
+          //     style={{
+          //       backgroundColor:
+          //         postStatus === "accepted"
+          //           ? "rgba(0,225,0, 0.5)"
+          //           : postStatus === "rejected"
+          //           ? "rgba(225,0,0,0.5)"
+          //           : "orange",
+          //     }}
+          //   >
+          //     {postStatus}
+          //   </Button>
+          // </Link>,
+        ]}
+      >
+        <Card.Meta
+          avatar={
+            <Avatar src={profilePic || "https://joesch.moe/api/v1/random"} />
+          }
+          title={title.substring(0, 50) + "..."}
+          description={description.substring(0, 50) + "..."}
+        />
+      </Card>
     </>
   );
 };

@@ -4,20 +4,31 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../Header";
 import "./styles.css";
-import { Card, Avatar, Button, Modal, Typography, Space } from "antd";
-import { Link } from "react-router-dom";
+import { Card, Avatar, Button, Spin } from "antd";
 import ErrorPage from "../ErrorPage";
 import CommentsModal from "../CommentsModal";
+import { LikeFilled, LikeOutlined } from "@ant-design/icons";
+import api from "../../Api/api";
+import Cookies from "js-cookie";
+import callLikeApi from "../../Api/likeApi";
+import callUnlikeApi from "../../Api/unLikeApi";
 
 function Comments(props) {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(false);
   const [postedUserInfo, setPostedUserInfo] = useState(null);
+  const [likes, setLikes] = useState([]);
   const [err, setErr] = useState("");
   const { id } = useParams();
+  const [me, setMe] = useState(null);
 
-  const { from, postedBy } = props?.location?.state[0];
-  console.log("Props--->", from, from === "View", postedBy);
+  const state = props?.location;
+  // console.log(state);
+
+  const { from } = props?.location?.state[0];
+  // console.log("Props--->", from, from === "View", postedBy);
+
+  const [modal, setModal] = useState(from === "View" ? false : true);
 
   const getPostInfo = () => {
     if (!id) {
@@ -28,6 +39,8 @@ function Comments(props) {
       .get(`/coc/get/post/${id}`)
       .then((response) => {
         setPost(response.data);
+        console.log(response?.data?.likes);
+        setLikes(response?.data?.likes || []);
         httpRequest
           .get(`/user/${response.data?.postedBy}`)
           .then((res) => {
@@ -52,18 +65,93 @@ function Comments(props) {
       });
   };
 
+  const getMe = async () => {
+    const token = Cookies.get("token");
+    try {
+      const resp = await api.get(`/user/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // console.log(resp);
+      setMe(resp.data);
+    } catch (err) {
+      // console.log(err);
+    } finally {
+    }
+  };
+
   useEffect(() => {
     getPostInfo();
+    getMe();
   }, [id]);
 
-  // console.log("Post ==>", post);
+  const likeCheck = () => {
+    return likes.includes(me?._id);
+  };
+
+  console.log("Post ==>", post);
+  if (err) {
+    return (
+      <>
+        <ErrorPage errorMessage={err}></ErrorPage>
+      </>
+    );
+  }
+
+  if (loading) {
+    return (
+      <>
+        <ErrorPage
+          showImage={false}
+          errorMessage="Wait! we are fetching post..."
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Spin spinning={loading}></Spin>
+          </div>
+        </ErrorPage>
+      </>
+    );
+  }
+
+  const handleLike = async () => {
+    if (likeCheck()) {
+      callUnlikeApi(post?._id)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    } else {
+      callLikeApi(post?._id)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
+
+    setLikes((prev) => {
+      let arr = [];
+      if (likeCheck()) {
+        const index = prev.indexOf(me?._id);
+        prev.splice(index, 1);
+        return [...prev];
+      } else {
+        return [...prev, me?._id];
+      }
+    });
+  };
+
+  console.log("Likes--->", likes);
 
   return (
     <>
       <Header></Header>
       <CommentsModal
-        open={from === "View" ? false : true}
+        open={modal}
         modalData={{ post, postedUserInfo }}
+        onCancel={() => setModal(false)}
       ></CommentsModal>
       <div className="centered-view">
         <Card
@@ -90,32 +178,17 @@ function Comments(props) {
               {/* </Link> */}
             </>
           }
-          // // actions={[
-          // //   <Link to={`/view/post/${post?._id}`}>
-          // //     {
-          // //       <Button type="primary">
-          // //         {post?.postStatus === "accepted" ? "Reject" : "Accept"}
-          // //       </Button>
-          // //     }
-          // //   </Link>,
-          // //   <Link to={`/view/post/${post?._id}`}>
-          // //     <Button>View More</Button>
-          // //   </Link>,
-          // //   <Link to={`/view/post/${post?._id}`}>
-          // //     <Button
-          // //       style={{
-          // //         backgroundColor:
-          // //           post?.postStatus === "accepted"
-          // //             ? "rgba(0,225,0, 0.5)"
-          // //             : post?.postStatus === "rejected"
-          // //             ? "rgba(225,0,0,0.5)"
-          // //             : "orange",
-          // //       }}
-          // //     >
-          // //       {post?.postStatus}
-          // //     </Button>
-          // //   </Link>,
-          // ]}
+          actions={[
+            <Button
+              icon={likeCheck() ? <LikeFilled></LikeFilled> : <LikeOutlined />}
+              type={likeCheck() ? "primary" : "default"}
+              onClick={() => handleLike()}
+            >
+              {likeCheck() ? `You trended this` : `Make this post trend`}
+            </Button>,
+            <Button onClick={() => setModal(true)}>Show Comments</Button>,
+            <Button onClick={() => setModal(true)}>Comment</Button>,
+          ]}
         >
           <Card.Meta
             avatar={

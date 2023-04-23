@@ -126,3 +126,7 @@
     font-size: 16px;
   }
 }
+
+.project-list-container {
+  position: absolute;
+}

@@ -6,6 +6,7 @@ import MyDescription from "../MyDescription";
 import Cookies from "js-cookie";
 import "./index.css";
 import axios from "axios";
+import api from "../../Api/api";
 
 class MyPost extends Component {
   state = { error: "", myPosts: [], toggle: false };
@@ -13,7 +14,7 @@ class MyPost extends Component {
   remove = async (id) => {
     const token = Cookies.get("token");
     try {
-      await axios.delete(`http://localhost:3500/delete/mypost/${id}`, {
+      await api.delete(`/delete/mypost/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -30,7 +31,7 @@ class MyPost extends Component {
   async componentDidMount() {
     const token = Cookies.get("token");
     try {
-      const result = await axios.get("http://localhost:3500/my/posts", {
+      const result = await api.get("/my/posts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

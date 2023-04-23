@@ -1,7 +1,7 @@
 import { Modal, Space, Typography, Input, Avatar, Button, Spin } from "antd";
 import React, { useState, useEffect } from "react";
 import "./styles.css";
-import httpRequest from "../../Api";
+// import httpRequest from "../../Api";
 import axios from "axios";
 import moment from "moment";
 import { useSelector } from "react-redux";
@@ -16,13 +16,13 @@ const RANDOM_COMMENTS_API =
   "https://644032eab9e6d064be0a8ef1.mockapi.io/coc/comment";
 
 function CommentsModal({ open, onOk, onCancel, modalData }) {
-  // console.log("Comments modal data--->", modalData);
+  console.log("Modal open --->", open);
 
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState("");
   const [err, setErr] = useState("");
-  const [modalOpen, setModalOpen] = useState(open);
+  // const [modalOpen, setModalOpen] = useState(open);
   const [success, setSuccess] = useState(PENDING);
   const [postingComment, setPostingComment] = useState(false);
   const [timer, setTimer] = useState(-10);
@@ -147,9 +147,9 @@ function CommentsModal({ open, onOk, onCancel, modalData }) {
   return (
     <div>
       <Modal
-        open={modalOpen}
+        open={open}
         onOk={onOk}
-        onCancel={() => setModalOpen(false)}
+        onCancel={() => onCancel()}
         footer={null}
         bodyStyle={{ height: 500, overflowY: "scroll" }}
         destroyOnClose={true}
