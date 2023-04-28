@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./index.css";
 import Cookies from "js-cookie";
 import { Component } from "react";
-import axios from "axios";
+import api from "../../Api/api";
 
 class MyDescription extends Component {
   state = { username: "", bio: "", email: "", profilePic: "" };
@@ -10,7 +10,7 @@ class MyDescription extends Component {
     const token = Cookies.get("token");
 
     try {
-      const result = await axios.get("http://localhost:3500/user/me", {
+      const result = await api.get("/user/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

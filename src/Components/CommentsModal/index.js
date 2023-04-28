@@ -245,7 +245,7 @@ function CommentsModal({ open, onOk, onCancel, modalData }) {
                           </Typography.Text>
                         </Space>
                         <Typography.Text style={{ fontSize: 14 }}>
-                          {moment(comment?.created_at).format("DD-MM-YYYY")}
+                          {moment(comment?.createdAt).format("DD-MM-YYYY")}
                         </Typography.Text>
                       </div>
                       <div>

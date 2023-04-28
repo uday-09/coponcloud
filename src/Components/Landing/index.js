@@ -20,9 +20,14 @@ const Landing = () => (
 
         <Link to="/login" className="link">
           <button type="button" className="button button3">
-            Login
+            Login as User
           </button>
         </Link>
+        {/* <Link  className="link"> */}
+        <button type="button" className="button button3">
+          <a href="http://localhost:3001">Login as Admin</a>
+        </button>
+        {/* </Link> */}
       </div>
     </div>
   </div>

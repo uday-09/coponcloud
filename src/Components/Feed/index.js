@@ -6,7 +6,7 @@ import "./index.css";
 /* import { useSelector } from "react-redux";
 /* import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"; */
-
+import api from "../../Api/api";
 import axios from "axios";
 import Header from "../Header";
 import Loader from "react-loader-spinner";
@@ -44,13 +44,13 @@ class Feed extends Component {
   fetchFeed = async () => {
     const token = Cookies.get("token");
     try {
-      const result = await axios.get("http://localhost:3500/feed/posts", {
+      const result = await api.get("/feed/posts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       console.log("result---->", result);
-      var user = await axios.get("http://localhost:3500/user/me", {
+      var user = await api.get("/user/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -78,7 +78,7 @@ class Feed extends Component {
   fetchUser = async () => {
     const token = Cookies.get("token");
     try {
-      const result = await axios.get("http://localhost:3500/user/me", {
+      const result = await api.get("/user/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

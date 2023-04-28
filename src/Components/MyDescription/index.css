@@ -1,3 +1,4 @@
+
 .home-container {
   display: flex;
   flex-direction: column;
@@ -26,7 +27,7 @@
   .home-container {
     flex-direction: row;
     justify-content: space-between;
-    padding-top: 96px;
+    background-color: #F5FEFD;
   }
 }
 

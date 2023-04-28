@@ -36,7 +36,7 @@ const PostItem = (props) => {
   /* try {
       const token = Cookies.get("token");
       const likes = await axios.patch(
-        `http://localhost:3500/post/like/${_id}`,
+
         {},
         {
           headers: {
@@ -85,12 +85,20 @@ const PostItem = (props) => {
           </p>
         </div>
       </div>
-
-      <img
-        className="project-item-image"
-        src={imageUri}
-        alt={`project-item ${_id}`}
-      />
+      <>
+      {imageUri.endsWith("mp4") || imageUri.endsWith("mkv") ? (
+              <video controls style={{width:450, height: 200 }}>
+                <source src={imageUri} type="video/mp4" />
+              </video>
+            ) : (
+              <img
+                className="project-item-image"
+                alt={`project-item ${_id}`}
+                src={imageUri}
+                style={{width:450,height: 200 }}
+              />)
+        }
+      </>
 
       <div className="project-item-details-container">
         <div className="icons-container">

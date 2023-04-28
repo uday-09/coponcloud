@@ -8,13 +8,13 @@ body {
   justify-content: space-between;
   width: 100%;
   margin: auto;
-  height: 150px;
+  height: 100px;
 
   box-shadow: 0px 4px 16px 0px #bfbfbf;
   margin-bottom: 60px;
   padding-left: 100px;
   padding-right: 0px;
-  background-color: white;
+  background-color:#F5FEFD;
   position: sticky;
   top: 0;
   left: 0;
@@ -26,9 +26,11 @@ body {
 @media screen and (min-width: 992px) {
   .nav-header {
     width: 100%;
-    height: 100px;
+    height: 70px;
     padding-left: 0px;
     padding-right: 0px;
+    position: sticky;
+    background-color:#F5FEFD;
   }
 }
 
@@ -39,27 +41,28 @@ body {
   justify-content: space-between;
   padding-top: 25px;
   padding-bottom: 25px;
+  margin-top: 10px;
+  background-color:#F5FEFD;
 }
 
-.website-logo {
-  font-size: 20px;
-  width: 45px;
-  height: 45px;
-  border-radius: 12px;
+.logo {
+    height: 70px;
+  width: 100px;
+  /* border-radius: 12px; */
   text-align: center;
   font-weight: 900;
   color: #1d4ed8;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #dbeafe;
+  background-color:#F5FEFD;
 }
 
 @media screen and (min-width: 768px) {
-  .website-logo {
-    font-size: 28px;
+  .logo {
+    font-size: 20px;
     width: 48px;
-    height: 48px;
+    /* height: 10px; */
   }
 }
 
@@ -72,11 +75,11 @@ body {
   list-style-type: none;
   margin-top: 0;
   margin-bottom: 0;
+  background-color:#F5FEFD;
 }
 
 .nav_link {
   margin-left: 15px;
-  font-size: 25px;
   text-decoration: none;
   color: black;
 }
@@ -91,21 +94,19 @@ body {
     text-decoration: none;
   }
   .button {
-    padding: 10px 20px;
-    background-color: transparent;
-    margin-left: 32px;
+    margin-left: 64px;
+    text-decoration: none;
+    margin-right:32px;
   }
 }
 
 .logo {
-  height: 100px;
+  height: 70px;
   width: 100px;
+  /* margin-bottom: 15px; */
 }
 
 .button {
-  padding: 10px 20px;
   background-color: transparent;
-  margin-left: 15px;
-  border: 1px solid grey;
-  border-radius: 4px;
+  margin-left: 30px;
 }

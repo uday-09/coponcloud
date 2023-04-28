@@ -3,7 +3,7 @@ import "./index.css";
 
 import Header from "../Header";
 import Cookies from "js-cookie";
-import axios from "axios";
+import api from "../../Api/api";
 import OthersDescription from "../OthersDescription";
 import OthersPosts from "../OthersPosts";
 
@@ -16,8 +16,8 @@ class User extends Component {
     console.log(id);
     const token = Cookies.get("token");
     try {
-      const result = await axios.get(
-        `http://localhost:3500/user/details/posts/${id}`,
+      const result = await api.get(
+        `/user/details/posts/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

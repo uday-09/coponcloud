@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Header from "../Header";
 import axios from "axios";
 import Cookies from "js-cookie";
+import api from "../../Api/api";
 
 class Login extends Component {
   state = {
@@ -102,8 +103,8 @@ class Login extends Component {
     try {
       this.setState({ error: "" });
       this.setState({ isLoading: true });
-      const imageResult = await axios.post(
-        "http://localhost:3500/post/crime/picture",
+      const imageResult = await api.post(
+        "/post/crime/picture",
         formData,
         {
           headers: {
@@ -112,8 +113,8 @@ class Login extends Component {
         }
       );
       console.log(imageResult.data);
-      await axios.patch(
-        "http://localhost:3500/user/update/me",
+      await api.patch(
+        "/user/update/me",
         {
           email,
           username,
@@ -158,7 +159,7 @@ class Login extends Component {
   async componentDidMount() {
     const token = Cookies.get("token");
     try {
-      const user = await axios.get("http://localhost:3500/user/me", {
+      const user = await api.get("/user/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

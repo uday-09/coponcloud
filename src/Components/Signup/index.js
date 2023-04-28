@@ -2,7 +2,7 @@ import { Component } from "react";
 import Cookies from "js-cookie";
 import "./index.css";
 import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
+import api from "../../Api/api";
 
 class Login extends Component {
   state = {
@@ -92,7 +92,7 @@ class Login extends Component {
     /*     console.log("submit triggered");
      */
     try {
-      const result = await axios.post("http://localhost:3500/user", {
+      const result = await api.post("/user", {
         username: this.state.username,
         password: this.state.password,
         email: this.state.gmail,

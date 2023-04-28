@@ -1,9 +1,9 @@
 import { Component } from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Loader from "react-loader-spinner";
 import Cookies from "js-cookie";
+import api from "../../Api/api";
 
 class Login extends Component {
   state = {
@@ -103,8 +103,8 @@ class Login extends Component {
         return;
       }
       this.setState({ isLoading: true });
-      const imageResult = await axios.post(
-        "http://localhost:3500/post/crime/picture",
+      const imageResult = await api.post(
+        "/post/crime/picture",
         formData,
         {
           headers: {
@@ -113,8 +113,8 @@ class Login extends Component {
         }
       );
       console.log(imageResult.data);
-      await axios.post(
-        "http://localhost:3500/crime/post",
+      await api.post(
+        "/crime/post",
         {
           title,
           description,
@@ -138,6 +138,7 @@ class Login extends Component {
       });
     } catch (err) {
       // this.setState({ isLoading: false });
+      console.log(err)
       this.setState({
         isLoading: false,
         error: "Something went wrong try again.",

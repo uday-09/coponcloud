@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import "./index.css";
 import { Link, Redirect } from "react-router-dom";
 /* import Fade from "../Fade"; */
-import axios from "axios";
+import api from "../../Api/api";
 
 class Login extends Component {
   state = {
@@ -65,7 +65,7 @@ class Login extends Component {
     event.preventDefault();
     console.log("submit triggered");
     try {
-      const result = await axios.post("http://localhost:3500/user/login", {
+      const result = await api.post("/user/login", {
         username: this.state.username,
         password: this.state.password,
       });

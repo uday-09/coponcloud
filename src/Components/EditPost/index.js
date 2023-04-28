@@ -2,7 +2,7 @@ import { Component } from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import axios from "axios";
+import api from "../../Api/api";
 import Cookies from "js-cookie";
 
 class Login extends Component {
@@ -105,8 +105,8 @@ class Login extends Component {
         return;
       }
       this.setState({ isLoading: true });
-      const imageResult = await axios.post(
-        "http://localhost:3500/post/crime/picture",
+      const imageResult = await api.post(
+        "/post/crime/picture",
         formData,
         {
           headers: {
@@ -115,8 +115,8 @@ class Login extends Component {
         }
       );
       console.log(imageResult.data);
-      await axios.patch(
-        `http://localhost:3500/post/update/${_id}`,
+      await api.patch(
+        `/post/update/${_id}`,
         {
           title,
           description,
