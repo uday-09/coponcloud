@@ -1,5 +1,18 @@
 import "./landing.css";
 import { Link } from "react-router-dom";
+import { ADMIN_APP_URL, USER_APP_URL } from "../../Utils/constants";
+import { Dropdown, Button, Typography } from "antd";
+
+const items = [
+  {
+    key: "1",
+    label: <a href={`${USER_APP_URL}/login`}>Login as user</a>,
+  },
+  {
+    key: "2",
+    label: <a href={ADMIN_APP_URL}>Login as Admin</a>,
+  },
+];
 
 const Landing = () => (
   <div className="landing-container">
@@ -13,20 +26,25 @@ const Landing = () => (
 
       <div className="buttons-container">
         <Link to="/signup" className="link">
-          <button type="button" className="button button3">
-            Signup
-          </button>
+          {/* <button type="button" className="button button3"> */}
+          <Button className="button button3">Signup</Button>
+          {/* </button> */}
         </Link>
 
-        <Link to="/login" className="link">
+        {/* <Link to="/login" className="link">
           <button type="button" className="button button3">
             Login as User
           </button>
-        </Link>
+        </Link> */}
         {/* <Link  className="link"> */}
-        <button type="button" className="button button3">
-          <a href="http://localhost:3001">Login as Admin</a>
-        </button>
+        <Dropdown
+          menu={{
+            items,
+          }}
+          placement="bottomLeft"
+        >
+          <Button className="button button3">Login</Button>
+        </Dropdown>
         {/* </Link> */}
       </div>
     </div>

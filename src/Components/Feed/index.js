@@ -18,7 +18,7 @@ import { addUser } from "../../redux/features/userSlice";
 
 const tabsList = [
   { tabId: "FEED", displayText: "Feed" },
-  { tabId: "TRENDING", displayText: "Trending" },
+  { tabId: "TRENDING", displayText: "Today's" },
   /*  { tabId: "SAVE", displayText: "My Saves" } */
 ];
 

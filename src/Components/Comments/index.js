@@ -20,6 +20,10 @@ function Comments(props) {
   const [likes, setLikes] = useState([]);
   const [err, setErr] = useState("");
   const { id } = useParams();
+
+  const value = useParams();
+  console.log(value);
+
   const [me, setMe] = useState(null);
 
   const state = props?.location;
@@ -31,13 +35,17 @@ function Comments(props) {
   const [modal, setModal] = useState(from === "View" ? false : true);
 
   const getPostInfo = () => {
+    console.log("Comes here to fetch post");
     if (!id) {
+      window.location.reload(false);
       return setErr("Something went wrong!");
     }
+
     setLoading(true);
     httpRequest
       .get(`/coc/get/post/${id}`)
       .then((response) => {
+        console.log(response);
         setPost(response.data);
         console.log(response?.data?.likes);
         setLikes(response?.data?.likes || []);
@@ -186,7 +194,7 @@ function Comments(props) {
             >
               {likeCheck() ? `You trended this` : `Make this post trend`}
             </Button>,
-            <Button onClick={() => setModal(true)}>Show Comments</Button>,
+            // <Button onClick={() => setModal(true)}>Show Comments</Button>,
             <Button onClick={() => setModal(true)}>Comment</Button>,
           ]}
         >
