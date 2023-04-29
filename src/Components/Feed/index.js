@@ -6,17 +6,15 @@ import "./index.css";
 /* import { useSelector } from "react-redux";
 /* import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"; */
-import api from "../../Api/api";
-import axios from "axios";
+
 import Header from "../Header";
 import Loader from "react-loader-spinner";
 import callLikeApi from "../../Api/likeApi";
 import callUnlikeApi from "../../Api/unLikeApi";
-// import ErrorPage from "../DisplayError/ErrorPage";
+import ErrorPage from "../DisplayError/ErrorPage";
 import { connect } from "react-redux";
 import { addUser } from "../../redux/features/userSlice";
-import ErrorPage from "../ErrorPage";
-import { Typography } from "antd";
+import api from "../../Api/api";
 
 const tabsList = [
   { tabId: "FEED", displayText: "Feed" },
@@ -165,7 +163,7 @@ class Feed extends Component {
       return (
         <div>
           <Header></Header>
-          <ErrorPage errorMessage={"OOPS! Something went wrong"}></ErrorPage>
+          <ErrorPage message={"OOPS! Something went wrong"}></ErrorPage>
         </div>
       );
     }
@@ -174,14 +172,13 @@ class Feed extends Component {
         <div>
           <Header></Header>
           <ErrorPage
-            errorMessage={"Currently we have No feed posts to show!"}
+            message={"Currently we have No feed posts to show!"}
           ></ErrorPage>
         </div>
       );
     }
 
     if (res.length !== 0) {
-      console.log(this.getTrending());
       return (
         <>
           <Header />
@@ -198,36 +195,26 @@ class Feed extends Component {
             </div>
           </ul>
           <ul className="project-list-container">
-            {display === "TRENDING" ? (
-              <>
-                {this.getTrending().length === 0 ? (
-                  <>
-                    <Typography.Text>No post to show!</Typography.Text>
-                  </>
-                ) : (
-                  this.getTrending().map((projectDetails, index) => (
-                    <PostItem
-                      key={projectDetails._id}
-                      userId={userInfo._id}
-                      projectDetails={projectDetails}
-                      thisIsLiked={this.thisIsLiked}
-                      index={index}
-                    />
-                  ))
-                )}
-              </>
-            ) : (
-              res.map((projectDetails, index) => (
-                <PostItem
-                  key={projectDetails._id}
-                  userId={userInfo._id}
-                  projectDetails={projectDetails}
-                  thisIsLiked={this.thisIsLiked}
-                  index={index}
-                  unLikePost={this.unLike}
-                />
-              ))
-            )}
+            {display === "TRENDING"
+              ? this.getTrending().map((projectDetails, index) => (
+                  <PostItem
+                    key={projectDetails._id}
+                    userId={userInfo._id}
+                    projectDetails={projectDetails}
+                    thisIsLiked={this.thisIsLiked}
+                    index={index}
+                  />
+                ))
+              : res.map((projectDetails, index) => (
+                  <PostItem
+                    key={projectDetails._id}
+                    userId={userInfo._id}
+                    projectDetails={projectDetails}
+                    thisIsLiked={this.thisIsLiked}
+                    index={index}
+                    unLikePost={this.unLike}
+                  />
+                ))}
           </ul>
         </>
       );
