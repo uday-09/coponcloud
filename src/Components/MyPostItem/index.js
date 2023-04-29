@@ -1,13 +1,15 @@
 import "./index.css";
 import { Link } from "react-router-dom";
-import { Card, Avatar, Button } from "antd";
+import { Card, Avatar, Button, Tooltip } from "antd";
 /* import { SlLike, SlDislike } from "react-icons/sl";
 import { TfiComments } from "react-icons/tfi";
 import { CiSaveDown2 } from "react-icons/ci"; */
 
 const MyPostItem = (props) => {
   const { projectDetails, remove } = props;
-  const { _id, imageUri, description, title, profilePic } = projectDetails;
+  console.log("each post--->", projectDetails);
+  const { _id, imageUri, description, title, profilePic, postStatus } =
+    projectDetails;
 
   const removeClicked = () => {
     /* remove(_id); */
@@ -86,7 +88,34 @@ const MyPostItem = (props) => {
       >
         <Card.Meta
           avatar={
-            <Avatar src={profilePic || "https://joesch.moe/api/v1/random"} />
+            <Tooltip
+              title={`${
+                postStatus === "accepted"
+                  ? "This post is accepted"
+                  : postStatus === "rejected"
+                  ? "This is rejected"
+                  : "This post is pending"
+              }`}
+              color={
+                postStatus === "accepted"
+                  ? "green"
+                  : postStatus === "rejected"
+                  ? "red"
+                  : "yellow"
+              }
+            >
+              <Avatar
+                style={{
+                  backgroundColor:
+                    postStatus === "accepted"
+                      ? "green"
+                      : postStatus === "rejected"
+                      ? "red"
+                      : "yellow",
+                }}
+                src={profilePic || "https://joesch.moe/api/v1/random"}
+              />
+            </Tooltip>
           }
           title={title.substring(0, 50) + "..."}
           description={description.substring(0, 50) + "..."}

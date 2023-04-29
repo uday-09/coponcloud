@@ -1,10 +1,11 @@
 import "./index.css";
 import { Link } from "react-router-dom";
-import { Card, Avatar, Button } from "antd";
+import { Card, Avatar, Button, Tooltip } from "antd";
 
 const OthersPosts = (props) => {
   const { projectDetails } = props;
-  const { imageUri, title, description, _id, profilePic } = projectDetails;
+  const { imageUri, title, description, _id, profilePic, postStatus } =
+    projectDetails;
 
   return (
     <>
@@ -100,7 +101,34 @@ const OthersPosts = (props) => {
       >
         <Card.Meta
           avatar={
-            <Avatar src={profilePic || "https://joesch.moe/api/v1/random"} />
+            <Tooltip
+              title={`${
+                postStatus === "accepted"
+                  ? "This post is accepted"
+                  : postStatus === "rejected"
+                  ? "This is rejected"
+                  : "This post is pending"
+              }`}
+              color={
+                postStatus === "accepted"
+                  ? "green"
+                  : postStatus === "rejected"
+                  ? "red"
+                  : "yellow"
+              }
+            >
+              <Avatar
+                style={{
+                  backgroundColor:
+                    postStatus === "accepted"
+                      ? "green"
+                      : postStatus === "rejected"
+                      ? "red"
+                      : "yellow",
+                }}
+                src={profilePic || "https://joesch.moe/api/v1/random"}
+              />
+            </Tooltip>
           }
           title={title.substring(0, 50) + "..."}
           description={description.substring(0, 50) + "..."}
