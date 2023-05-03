@@ -1,12 +1,12 @@
 import "./landing.css";
 import { Link } from "react-router-dom";
-import { ADMIN_APP_URL, USER_APP_URL } from "../../Utils/constants";
-import { Dropdown, Button, Typography } from "antd";
+import { ADMIN_APP_URL } from "../../Utils/constants";
+import { Dropdown, Button } from "antd";
 
 const items = [
   {
     key: "1",
-    label: <a href={`${USER_APP_URL}/login`}>Login as user</a>,
+    label: <a href={`/login`}>Login as user</a>,
   },
   {
     key: "2",
