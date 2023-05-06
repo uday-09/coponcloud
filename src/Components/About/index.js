@@ -7,9 +7,9 @@ const About = () => (
     <div className="about-main-container">
       <div className="About-descritpion">
         <img src="assets/logo.png" alt="logo" className="logo-landing" />
-        <h1>Who we are and we do ?</h1>
-        <h3>WELCOME</h3>
-        <p className="project-item-description">
+        <h1 className="about">Who we are and we do ?</h1>
+        <h3 className="welcome">WELCOME</h3>
+        <p className="description">
           Cop On Cloud is developed by the students of RGUKT Basar.The motive of
           building this app is to bring awareness among ourselves about the
           society we are living in. We provide the public with a platform where

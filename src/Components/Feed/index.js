@@ -159,6 +159,19 @@ class Feed extends Component {
     const { display, res, userInfo } = this.state;
     console.log(this.state);
 
+    if (this.state.isFetching) {
+      return (
+        <>
+          <Header />
+          <div className="loader">
+            <div className="products-loader-container">
+              <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+            </div>
+          </div>
+        </>
+      );
+    }
+
     if (this.state.error) {
       return (
         <div>
@@ -216,19 +229,6 @@ class Feed extends Component {
                   />
                 ))}
           </ul>
-        </>
-      );
-    }
-
-    if (this.state.isFetching) {
-      return (
-        <>
-          <Header />
-          <div className="loader">
-            <div className="products-loader-container">
-              <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
-            </div>
-          </div>
         </>
       );
     }

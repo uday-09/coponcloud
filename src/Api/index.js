@@ -6,7 +6,7 @@ const token = Cookies.get("token");
 console.log(token);
 
 const httpRequest = axios.create({
-  baseURL: "http://localhost:3500/",
+  baseURL: "http://184.73.70.177/",
   headers: {
     Authorization: `Bearer ${token}`,
   },

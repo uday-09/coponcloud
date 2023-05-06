@@ -3,5 +3,5 @@ export const APP_IMAGE =
 
 export const SECONDARY_COLOR = "#B3DAFF";
 
-export const ADMIN_APP_URL = "http://localhost:3001";
+export const ADMIN_APP_URL = "http://54.224.249.155/";
 export const USER_APP_URL = "http://localhost:3000";
