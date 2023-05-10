@@ -5,3 +5,6 @@ export const SECONDARY_COLOR = "#B3DAFF";
 
 export const ADMIN_APP_URL = "http://54.224.249.155/";
 export const USER_APP_URL = "http://localhost:3000";
+
+export const HELP_VIDEO =
+  "https://cop-on-cloud.s3.us-east-1.amazonaws.com/image-1683693404203.mp4";

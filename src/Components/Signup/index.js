@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import "./index.css";
 import { Link, Redirect } from "react-router-dom";
 import api from "../../Api/api";
+import { Button } from "antd";
 
 class Login extends Component {
   state = {
@@ -14,6 +15,7 @@ class Login extends Component {
     location: "none",
     name: "anonymous",
     successMessage: "",
+    loading: false,
   };
 
   onChangeUsername = (event) => {
@@ -88,10 +90,12 @@ class Login extends Component {
   };
 
   onsubmit = async (event) => {
+    this.setState({ error: "" });
     event.preventDefault();
     /*     console.log("submit triggered");
      */
     try {
+      this.setState({ loading: true });
       const result = await api.post("/user", {
         username: this.state.username,
         password: this.state.password,
@@ -112,6 +116,8 @@ class Login extends Component {
       } else {
         this.setState({ error: "Something went wrong" });
       }
+    } finally {
+      this.setState({ loading: false });
     }
     /*
     const { username, password } = this.state;
@@ -132,8 +138,15 @@ class Login extends Component {
   };
 
   render() {
+    const { history } = this.props;
+
     const token = Cookies.get("token");
     if (token !== undefined) {
+      if (window.confirm("A user is already logged in! Logout first?")) {
+        Cookies.remove("token");
+        history.replace("/signup");
+      }
+
       return <Redirect to="/feed" />;
     }
     return (
@@ -158,9 +171,17 @@ class Login extends Component {
           {this.state.error !== "" ? (
             <p className="error-text">*{this.state.error}</p>
           ) : null}
-          <button type="submit" className="login-button">
+          {/* <button type="submit" className="login-button">
             Register
-          </button>
+          </button> */}
+          <Button
+            type="primary"
+            style={{ marginTop: 10, width: "100%" }}
+            loading={this.state.loading}
+            onClick={this.onsubmit}
+          >
+            Register
+          </Button>
           <br />
           <Link to="/login">Already have an account ? </Link>
         </form>

@@ -4,12 +4,14 @@ import "./index.css";
 import { Link, Redirect } from "react-router-dom";
 /* import Fade from "../Fade"; */
 import api from "../../Api/api";
+import { Button } from "antd";
 
 class Login extends Component {
   state = {
     username: "",
     password: "",
     error: "",
+    loading: false,
   };
 
   onChangeUsername = (event) => {
@@ -64,7 +66,9 @@ class Login extends Component {
   onsubmit = async (event) => {
     event.preventDefault();
     console.log("submit triggered");
+    this.setState({ error: "" });
     try {
+      this.setState({ loading: true });
       const result = await api.post("/user/login", {
         username: this.state.username,
         password: this.state.password,
@@ -80,6 +84,8 @@ class Login extends Component {
       if (err?.response?.data) {
         this.setState({ error: err.response.data.message });
       }
+    } finally {
+      this.setState({ loading: false });
     }
     /*
     const { username, password } = this.state;
@@ -132,9 +138,18 @@ class Login extends Component {
             <div className="input-container">{this.renderUsernameField()}</div>
             <div className="input-container">{this.renderPasswordField()}</div>
             {error !== "" ? <p className="error-text">*{error}</p> : null}
-            <button type="submit" className="login-button">
+            {/* <button type="submit" className="login-button">
               Login
-            </button>
+            </button> */}
+
+            <Button
+              type="primary"
+              loading={this.state.loading}
+              onClick={this.onsubmit}
+              style={{ marginTop: 10, width: "100%" }}
+            >
+              Login
+            </Button>
 
             <br />
             <Link to="/signup">Didn't have an account ? </Link>

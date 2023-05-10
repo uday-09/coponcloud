@@ -31,6 +31,7 @@ class Feed extends Component {
     res: [],
     userInfo: {},
     toggled: false,
+    trending: [],
   };
 
   takingSearchInput = (event) => {
@@ -62,6 +63,7 @@ class Feed extends Component {
         userInfo: { ...user.data },
         error: "",
       });
+      this.getTrending();
     } catch (err) {
       this.setState({ isFetching: false });
       if (err?.response?.data) {
@@ -127,6 +129,34 @@ class Feed extends Component {
       .catch((err) => console.log(err));
   };
 
+  trendLike = (id, index) => {
+    const newState = this.state;
+    newState.trending[index].likes = [
+      ...newState.trending[index].likes,
+      newState.userInfo._id,
+    ];
+    this.setState(newState);
+    callLikeApi(id)
+      .then((data) => console.log(data))
+      .catch((err) => {
+        console.log(JSON.parse(err.message).message);
+      });
+  };
+
+  trendUnlike = (id, index) => {
+    const newState = this.state;
+    const likesArray = newState.trending[index].likes;
+    let findIndex = likesArray.indexOf(this.state.userInfo._id);
+    if (findIndex > -1) {
+      likesArray.splice(findIndex, 1);
+    }
+    newState.trending[index].likes = likesArray;
+    this.setState(newState);
+    callUnlikeApi(id)
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
+
   //-----------------shuffle------------------------
 
   shuffledEmojisList = (res) => {
@@ -151,12 +181,12 @@ class Feed extends Component {
         date.toISOString().substring(0, 10)
       );
     });
-    console.log(trending);
-    return trending;
+    console.log("trending--->", trending);
+    this.setState({ trending });
   };
 
   render() {
-    const { display, res, userInfo } = this.state;
+    const { display, res, userInfo, trending } = this.state;
     console.log(this.state);
 
     if (this.state.isFetching) {
@@ -209,13 +239,14 @@ class Feed extends Component {
           </ul>
           <ul className="project-list-container">
             {display === "TRENDING"
-              ? this.getTrending().map((projectDetails, index) => (
+              ? trending.map((projectDetails, index) => (
                   <PostItem
                     key={projectDetails._id}
                     userId={userInfo._id}
                     projectDetails={projectDetails}
-                    thisIsLiked={this.thisIsLiked}
                     index={index}
+                    thisIsLiked={this.trendLike}
+                    unLikePost={this.trendUnlike}
                   />
                 ))
               : res.map((projectDetails, index) => (

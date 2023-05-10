@@ -2,8 +2,8 @@ import "./index.css";
 import Header from "../Header";
 import ReactPlayer from "react-player";
 import { Component } from "react";
+import { HELP_VIDEO } from "../../Utils/constants";
 
-const videoURL = "https://www.youtube.com/watch?v=OTQ1pNm9nsI";
 class Help extends Component {
   state = {
     isPlaying: false,
@@ -24,11 +24,13 @@ class Help extends Component {
           <div className="video-container">
             <h1 className="heading">Video Guide</h1>
             <div className="responsive-container">
-              <ReactPlayer url={videoURL} playing={isPlaying} />
+              <video controls>
+                <source src={HELP_VIDEO} type="video/mp4" />
+              </video>{" "}
             </div>
-            <button type="button" className="button" onClick={this.onClickPlay}>
+            {/* <button type="button" className="button" onClick={this.onClickPlay}>
               {btnText}
-            </button>
+            </button> */}
           </div>
         </div>
       </>
